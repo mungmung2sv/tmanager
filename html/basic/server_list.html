@@ -1,0 +1,1454 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=1200"/>
+<link rel="canonical" href="">
+<link rel="shortcut icon" type="image/x-icon" href="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta property="og:title" content=""/>
+<meta property="og:url" content="" />
+<meta property="og:image" content="" />
+<meta property="og:site_name" content=""/>
+<meta property="og:description" content="" />
+<title>T-Manager</title>
+<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/common.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/content.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/simplebar.css" />
+<script src="../../assets/js/jquery-3.4.1.min.js"></script>
+<script src="../../assets/js/jquery-ui.min.js"></script>
+<script src="../../assets/js/simplebar.min.js"></script>
+<script src="../../assets/js/common.js"></script>
+</head>
+<body>
+
+<!-- wrap -->
+<div id="layout">
+	<h1 id="header_h1">T-Manager</h1>
+	<div id="skip_to_container">
+		<!-- skip navigation -->
+		<a href="#content">내용 바로가기</a>
+		<a href="#nav">서비스메뉴 바로가기</a>
+	</div>
+	<hr class="hide" />	
+
+	<!-- header -->
+	<div id="aside">
+        <script>
+            //자바스크립트로 쿠키확인 후 처리하기때문에 약간의 딜레이가 있을수 있음. 딜레이 없이 하려면 회원db에 상태값 저장해서 로드시 클래스 출력해서 사용하면 됨.  쿠키 딜레이 최소화 하기위해 태그 바로밑에서 스크립트 실행
+            const menuState = getCookie('menuState');
+            const asideElement = document.getElementById('aside');
+            if (menuState === 'open') {
+                asideElement.classList.add('active');
+            }
+        </script>
+		<div id="logo">
+            <a href="../main/main.html" class="large"><img src="../../assets/images/logo.svg" alt="T-Manager"></a>
+            <a href="../main/main.html" class="small"><img src="../../assets/images/logo_small.svg" alt="T-Manager"></a>
+        </div>
+        <div id="nav">
+            <ul>
+                <li class="active open"><a href="javascript:;"><img src="../../assets/images/nav_icon_basic.svg" class="nav_icon"><span>기본관리</span></a>
+                    <ul>
+                        <li><a href="../basic/server_list.html" class="active">서버관리</a></li> 
+                        <li><a href="../basic/chanel_list.html">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;"><img src="../../assets/images/nav_icon_server.svg" class="nav_icon"><span>서버설정</span></a>
+                    <ul>
+                        <li><a href="javascript:;">서버관리</a></li>
+                        <li><a href="javascript:;">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;"><img src="../../assets/images/nav_icon_professional.svg" class="nav_icon"><span>전문관리</span></a>
+                    <ul>
+                        <li><a href="javascript:;">서버관리</a></li>
+                        <li><a href="javascript:;">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;"><img src="../../assets/images/nav_icon_demon.svg" class="nav_icon"><span>데몬관리</span></a>
+                    <ul>
+                        <li><a href="javascript:;">서버관리</a></li>
+                        <li><a href="javascript:;">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;"><img src="../../assets/images/nav_icon_data.svg" class="nav_icon"><span>데이터관리</span></a>
+                    <ul>
+                        <li><a href="javascript:;">서버관리</a></li>
+                        <li><a href="javascript:;">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;"><img src="../../assets/images/nav_icon_statistics.svg" class="nav_icon"><span>통계관리</span></a>
+                    <ul>
+                        <li><a href="javascript:;">서버관리</a></li>
+                        <li><a href="javascript:;">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;"><img src="../../assets/images/nav_icon_operation.svg" class="nav_icon"><span>운영관리</span></a>
+                    <ul>
+                        <li><a href="javascript:;">서버관리</a></li>
+                        <li><a href="javascript:;">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+	</div>
+	<!-- //header -->	
+
+    <div id="content_wrap">
+        <div id="header">
+            <div class="l">
+                <button id="menu_toggle" type="button" onclick="asideActive();">메뉴열기</button>
+                <script>
+                    //자바스크립트로 쿠키확인 후 처리하기때문에 약간의 딜레이가 있을수 있음. 딜레이 없이 하려면 회원db에 상태값 저장해서 로드시 클래스 출력해서 사용하면 됨.  쿠키 딜레이 최소화 하기위해 태그 바로밑에서 스크립트 실행
+                    const menuToggle = document.getElementById('menu_toggle');
+                    if (menuState === 'open') {
+                        menuToggle.classList.add('active');
+                    }
+
+                    //메뉴 토글 & 쿠키저장
+                    function asideActive(){
+                        const menuToggle = document.getElementById('menu_toggle');
+                        const asideElement = document.getElementById('aside');
+
+                        //메뉴 닫기
+                        if(menuToggle.classList.contains('active')){
+                            menuToggle.classList.remove('active');
+                            asideElement.classList.remove('active');
+                            setCookie('menuState', 'closed', 0);//쿠키저장
+                        }else{//메뉴 열기
+                            menuToggle.classList.add('active');
+                            asideElement.classList.add('active');
+                            setCookie('menuState', 'open', 0); //쿠키저장
+                        }
+                    }
+                </script>
+            </div>
+            <div class="r">
+                <div class="header_links">
+                    <div class="item"><a href="javascript:;" class="home"><img src="../../assets/images/header_icon_home.svg" class="header_icon"><span>홈</span></a></div>
+                    <div class="item"><a href="javascript:;" class="password"><img src="../../assets/images/header_icon_password.svg" class="header_icon"><span>비밀번호변경</span></a></div>
+                    <div class="item"><a href="../login/login.html" class="logout"><img src="../../assets/images/header_icon_logout.svg" class="header_icon"><span>로그아웃</span></a></div>
+                </div>
+            </div>
+        </div>
+        <!-- content -->
+        <div id="content">
+            <div class="page_title">
+                <h2>서버관리</h2>
+                <div class="page_history">
+                    <span class="item">기본관리</span>
+                    <span class="item">서버관리</span>
+                </div>
+            </div>
+
+            <div class="page">
+                <div class="list_search w_box">
+                    <div class="ls_title">검색조건</div>
+                    <div class="ls_content">
+                        <div class="item">
+                            <div class="tit">서버</div>
+                            <div class="cnt">
+                                <div class="input_group">
+                                    <!-- 페이지 로드 시 active된 옵션 기준으로 input hidden에 data-id 값 출력, select_selected에 문자 출력 -->
+                                    <div class="custom_select">
+                                        <input type="hidden">
+                                        <button type="button" class="select_selected" onclick="customSelect(this)">전체</button>
+                                        <div class="options design_scroll" data-simplebar>
+                                            <div class="item"><a href="javascript:;" data-id="all" class="active" onclick="customSelectSelect(this)">전체</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode1" onclick="customSelectSelect(this)">서버1</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode2" onclick="customSelectSelect(this)">서버2</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode3" onclick="customSelectSelect(this)">서버3</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode4" onclick="customSelectSelect(this)">서버4</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode5" onclick="customSelectSelect(this)">서버5</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode6" onclick="customSelectSelect(this)">서버6</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode7" onclick="customSelectSelect(this)">서버7</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode8" onclick="customSelectSelect(this)">서버8</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="tit">채널</div>
+                            <div class="cnt">
+                                <div class="input_group">
+                                    <!-- 페이지 로드 시 active된 옵션 기준으로 input hidden에 data-id 값 출력, select_selected에 문자 출력 -->
+                                    <div class="custom_select">
+                                        <input type="hidden">
+                                        <button type="button" class="select_selected" onclick="customSelect(this)">전체</button>
+                                        <div class="options design_scroll" data-simplebar>
+                                            <div class="item"><a href="javascript:;" data-id="all" class="active" onclick="customSelectSelect(this)">전체</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode1" onclick="customSelectSelect(this)">서버1</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode2" onclick="customSelectSelect(this)">서버2</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode3" onclick="customSelectSelect(this)">서버3</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode4" onclick="customSelectSelect(this)">서버4</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode5" onclick="customSelectSelect(this)">서버5</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode6" onclick="customSelectSelect(this)">서버6</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode7" onclick="customSelectSelect(this)">서버7</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode8" onclick="customSelectSelect(this)">서버8</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="tit">프로세스타입</div>
+                            <div class="cnt">
+                                <div class="input_group">
+                                    <!-- 페이지 로드 시 active된 옵션 기준으로 input hidden에 data-id 값 출력, select_selected에 문자 출력 -->
+                                    <div class="custom_select">
+                                        <input type="hidden">
+                                        <button type="button" class="select_selected" onclick="customSelect(this)">전체</button>
+                                        <div class="options design_scroll" data-simplebar>
+                                            <div class="item"><a href="javascript:;" data-id="all" class="active" onclick="customSelectSelect(this)">전체</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode1" onclick="customSelectSelect(this)">서버1</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode2" onclick="customSelectSelect(this)">서버2</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode3" onclick="customSelectSelect(this)">서버3</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode4" onclick="customSelectSelect(this)">서버4</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode5" onclick="customSelectSelect(this)">서버5</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode6" onclick="customSelectSelect(this)">서버6</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode7" onclick="customSelectSelect(this)">서버7</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode8" onclick="customSelectSelect(this)">서버8</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="tit">서비스코드</div>
+                            <div class="cnt">
+                                <div class="input_group">
+                                    <!-- 페이지 로드 시 active된 옵션 기준으로 input hidden에 data-id 값 출력, select_selected에 문자 출력 -->
+                                    <div class="custom_select">
+                                        <input type="hidden">
+                                        <button type="button" class="select_selected" onclick="customSelect(this)">전체</button>
+                                        <div class="options design_scroll" data-simplebar>
+                                            <div class="item"><a href="javascript:;" data-id="all" class="active" onclick="customSelectSelect(this)">전체</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode1" onclick="customSelectSelect(this)">서버1</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode2" onclick="customSelectSelect(this)">서버2</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode3" onclick="customSelectSelect(this)">서버3</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode4" onclick="customSelectSelect(this)">서버4</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode5" onclick="customSelectSelect(this)">서버5</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode6" onclick="customSelectSelect(this)">서버6</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode7" onclick="customSelectSelect(this)">서버7</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode8" onclick="customSelectSelect(this)">서버8</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="tit">검색명</div>
+                            <div class="cnt">
+                                <div class="input_group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="btns">
+                            <button type="submit" class="btn btn_md btn_submit"><img src="../../assets/images/btn_icon_search.svg">조회</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col_6 w_box">
+                        <div class="card_header">
+                            <div class="l">
+                                <div class="card_title">서버 목록</div>
+                            </div>
+                            <div class="r">
+                                <button type="button" class="btn btn_md btn_submit" onclick="openLayer('#server_registration')"><img src="../../assets/images/btn_icon_write.svg">서버등록</button>
+                            </div>
+                        </div>
+                        <div class="card_body">
+                            <!-- 
+                                thead_fixed thead 스크롤 고정
+                                table_nowrap 내용 줄바꿈없이 한줄로 보임
+                             -->
+                            <div class="table_list thead_fixed table_nowrap design_scroll" data-simplebar style="height:59.6rem;max-height:59.6rem;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>서버명</th>
+                                            <th>IP</th>
+                                            <th>PORT</th>
+                                            <th>OS 종류</th>
+                                            <th>설정</th>
+                                            <th>기타1</th>
+                                            <th>기타2</th>
+                                            <th>기타3</th>
+                                            <th>기타4</th>
+                                            <th>기타5</th>
+                                            <th>기타6</th>
+                                            <th>기타7</th>
+                                            <th>기타8</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link">서버1</a></td>
+                                            <td>192.168.0.1</td>
+                                            <td>8088</td>
+                                            <td>리눅스</td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_modify')"><img src="../../assets/images/btn_icon_modify.svg">수정</button>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#server_remove')"><img src="../../assets/images/btn_icon_remove.svg">삭제</button>
+                                            </td>
+                                            <td>기타1</td>
+                                            <td>기타2</td>
+                                            <td>기타3</td>
+                                            <td>기타4</td>
+                                            <td>기타5</td>
+                                            <td>기타6</td>
+                                            <td>기타7</td>
+                                            <td>기타8</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="list_action">
+                                <div class="l">
+                                    <div class="paging_select">
+                                        <div class="input_group">
+                                            <!-- 페이지 로드 시 active된 옵션 기준으로 input hidden에 data-id 값 출력, select_selected에 문자 출력 -->
+                                            <div class="custom_select">
+                                                <input type="hidden">
+                                                <button type="button" class="select_selected" onclick="customSelect(this)">15</button>
+                                                <div class="options design_scroll" data-simplebar>
+                                                    <div class="item"><a href="javascript:;" data-id="15" class="active" onclick="customSelectSelect(this)">15</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="30" onclick="customSelectSelect(this)">30</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="45" onclick="customSelectSelect(this)">45</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="50" onclick="customSelectSelect(this)">50</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="page_status">1-15 of 50</div>
+                                    </div>
+                                </div>
+                                <div class="r">
+                                    <div class="paging">
+                                        <a href="javascript:;" class="pg first disabled"></a>
+                                        <a href="javascript:;" class="pg prev disabled"></a>
+                                        <a href="javascript:;" class="pg first"></a>
+                                        <a href="javascript:;" class="pg prev "></a>
+                                        <a href="javascript:;">1</a>
+                                        <a href="javascript:;" class="active">2</a>
+                                        <a href="javascript:;">3</a>
+                                        <a href="javascript:;">4</a>
+                                        <a href="javascript:;">5</a>
+                                        <a href="javascript:;" class="pg next"></a>
+                                        <a href="javascript:;" class="pg end"></a>
+                                        <a href="javascript:;" class="pg next disabled"></a>
+                                        <a href="javascript:;" class="pg end disabled"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col_6 w_box">
+                        <div class="card_header">
+                            <div class="l">
+                                <div class="card_title">서버1</div>
+                            </div> 
+                            <div class="r">
+                                <button type="button" class="btn btn_md btn_white" onclick="openLayer('#chanel_registration')"><img src="../../assets/images/btn_icon_add.svg">추가</button>
+                                <button type="button" class="btn btn_md btn_white"><img src="../../assets/images/btn_icon_folder.svg">불러오기</button>
+                                <button type="button" class="btn btn_md btn_white" onclick="openLayer('#excel_upload')"><img src="../../assets/images/btn_icon_upload.svg">엑셀업로드</button>
+                                <button type="button" class="btn btn_md btn_white"><img src="../../assets/images/btn_icon_download.svg">다운로드</button>
+                                <button type="button" class="btn btn_md btn_submit"><img src="../../assets/images/btn_icon_reset2.svg">동기화</button>
+                                <button type="button" class="btn btn_md btn_submit"><img src="../../assets/images/btn_icon_save.svg">저장</button>
+                            </div>
+                        </div>
+                        <div class="card_body">
+                            <!-- 
+                                thead_fixed thead 스크롤 고정
+                                table_nowrap 내용 줄바꿈없이 한줄로 보임
+                             -->
+                            <div class="table_list thead_fixed table_nowrap design_scroll" data-simplebar style="height:59.6rem;max-height:59.6rem;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>서버명</th>
+                                            <th>프로세스 타입</th>
+                                            <th>서비스명</th>
+                                            <th>서비스 상태</th>
+                                            <th>동기화 상태</th>
+                                            <th>삭제</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>A기관 채널1</td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td><span class="status_text green">동기화</span></td>
+                                            <td><label class="checkbox single"><input type="checkbox"><span class="ck_icon"></span></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td>A기관 채널2</td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td><span class="status_circle red">중지</span></td>
+                                            <td><span class="status_text blue">신규</span></td>
+                                            <td><label class="checkbox single"><input type="checkbox" checked><span class="ck_icon"></span></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td>A기관 채널3</td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td><span class="status_text green">동기화</span></td>
+                                            <td><label class="checkbox single"><input type="checkbox" disabled><span class="ck_icon"></span></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td>A기관 채널3</td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td><span class="status_text green">동기화</span></td>
+                                            <td><label class="checkbox single"><input type="checkbox" disabled checked><span class="ck_icon"></span></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td>A기관 채널1</td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td><span class="status_text green">동기화</span></td>
+                                            <td><label class="checkbox single"><input type="checkbox"><span class="ck_icon"></span></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td>A기관 채널2</td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td><span class="status_circle red">중지</span></td>
+                                            <td><span class="status_text blue">신규</span></td>
+                                            <td><label class="checkbox single"><input type="checkbox" checked><span class="ck_icon"></span></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td>A기관 채널3</td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td><span class="status_text green">동기화</span></td>
+                                            <td><label class="checkbox single"><input type="checkbox" disabled><span class="ck_icon"></span></label></td>
+                                        </tr>
+                                        <tr>
+                                            <td>A기관 채널3</td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td><span class="status_text green">동기화</span></td>
+                                            <td><label class="checkbox single"><input type="checkbox" disabled checked><span class="ck_icon"></span></label></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="list_action">
+                                <div class="l">
+                                    <div class="paging_select">
+                                        <div class="input_group">
+                                            <!-- 페이지 로드 시 active된 옵션 기준으로 input hidden에 data-id 값 출력, select_selected에 문자 출력 -->
+                                            <div class="custom_select">
+                                                <input type="hidden">
+                                                <button type="button" class="select_selected" onclick="customSelect(this)">15</button>
+                                                <div class="options design_scroll" data-simplebar>
+                                                    <div class="item"><a href="javascript:;" data-id="15" class="active" onclick="customSelectSelect(this)">15</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="30" onclick="customSelectSelect(this)">30</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="45" onclick="customSelectSelect(this)">45</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="50" onclick="customSelectSelect(this)">50</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="page_status">1-15 of 50</div>
+                                    </div>
+                                </div>
+                                <div class="r">
+                                    <div class="paging">
+                                        <a href="javascript:;" class="pg first disabled"></a>
+                                        <a href="javascript:;" class="pg prev disabled"></a>
+                                        <a href="javascript:;" class="pg first"></a>
+                                        <a href="javascript:;" class="pg prev "></a>
+                                        <a href="javascript:;">1</a>
+                                        <a href="javascript:;" class="active">2</a>
+                                        <a href="javascript:;">3</a>
+                                        <a href="javascript:;">4</a>
+                                        <a href="javascript:;">5</a>
+                                        <a href="javascript:;" class="pg next"></a>
+                                        <a href="javascript:;" class="pg end"></a>
+                                        <a href="javascript:;" class="pg next disabled"></a>
+                                        <a href="javascript:;" class="pg end disabled"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- //content -->
+    
+        <div id="footer">
+            <span class="ver">T-Manager 2.0</span>
+            <span class="copy">Copyright ⓒ TrionSoft INC. ALL RIGTS RESERVED.</span>
+        </div>
+    </div>
+</div>
+
+
+<!-- 서버등록 -->
+<div id="server_registration" class="layer_popup">
+    <div class="layer_box design_scroll" data-simplebar style="max-width:50rem;">
+        <div class="layer_header">
+            <div class="layer_title">서버 등록</div>
+            <button type="button" class="layer_close" onclick="closeLayer(this)">팝업 닫기</button>
+        </div>
+        <div class="layer_body">
+            <div class="table_form">
+                <table>
+                    <colgroup>
+                        <col style="width:94px;">
+                        <col style="width:calc(50% - 94px);">
+                        <col style="width:94px;">
+                        <col style="width:calc(50% - 94px);">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th>서버명</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text">
+                                </div>
+                            </td>
+                            <th>서버 OS</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>IP</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text">
+                                </div>
+                            </td>
+                            <th>PORT</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>호스트명</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text">
+                                    <button class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_search2.svg" alt="">조회</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="layer_footer">
+            <div class="lf_btns">
+                <button type="button" class="btn btn_lg btn_gray" onclick="closeLayer(this)">닫기</button>
+                <button type="button" class="btn btn_lg btn_submit">저장</button>
+            </div>
+        </div>
+    </div>
+    <span class="layer_bg" onclick="closeLayer(this)"></span>
+</div>
+<!-- //서버등록 -->
+
+<!-- 서버수정 -->
+<div id="server_modify" class="layer_popup">
+    <div class="layer_box design_scroll" data-simplebar style="max-width:50rem;">
+        <div class="layer_header">
+            <div class="layer_title">서버 수정</div>
+            <button type="button" class="layer_close" onclick="closeLayer(this)">팝업 닫기</button>
+        </div>
+        <div class="layer_body">
+            <div class="table_form">
+                <table>
+                    <colgroup>
+                        <col style="width:94px;">
+                        <col style="width:calc(50% - 94px);">
+                        <col style="width:94px;">
+                        <col style="width:calc(50% - 94px);">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th>서버명</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="서버1">
+                                </div>
+                            </td>
+                            <th>서버 OS</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="리눅스">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>IP</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="192.168.0.1">
+                                </div>
+                            </td>
+                            <th>PORT</th>
+                            <td>
+                                <div class="input_group">
+                                    <!-- type="tel" 숫자만 입력가능 common.js -->
+                                    <input type="tel" value="8088">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>호스트명</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="TSVM-1019">
+                                    <button class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_search2.svg" alt="">조회</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="layer_footer">
+            <div class="lf_btns">
+                <button type="button" class="btn btn_lg btn_gray" onclick="closeLayer(this)">닫기</button>
+                <button type="button" class="btn btn_lg btn_submit">저장</button>
+            </div>
+        </div>
+    </div>
+    <span class="layer_bg" onclick="closeLayer(this)"></span>
+</div>
+<!-- //서버수정 -->
+
+<!-- 서버삭제 -->
+<div id="server_remove" class="layer_popup">
+    <div class="layer_box design_scroll" data-simplebar style="max-width:50rem;">
+        <div class="layer_header">
+            <div class="layer_title">서버 삭제</div>
+            <button type="button" class="layer_close" onclick="closeLayer(this)">팝업 닫기</button>
+        </div>
+        <div class="layer_body">
+            <div class="text_alert mb_15">서버를 삭제하시겠습니까?</div>
+            <div class="table_form">
+                <table>
+                    <colgroup>
+                        <col style="width:94px;">
+                        <col style="width:calc(50% - 94px);">
+                        <col style="width:94px;">
+                        <col style="width:calc(50% - 94px);">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th>서버명</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="서버1" readonly>
+                                </div>
+                            </td>
+                            <th>서버 OS</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="리눅스" readonly>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>IP</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="192.168.0.1" readonly>
+                                </div>
+                            </td>
+                            <th>PORT</th>
+                            <td>
+                                <div class="input_group">
+                                    <!-- type="tel" 숫자만 입력가능 common.js -->
+                                    <input type="tel" value="8088" readonly>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>호스트명</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="TSVM-1019" readonly>
+                                    <button class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_search2.svg" alt="">조회</button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="layer_footer">
+            <div class="lf_btns">
+                <button type="button" class="btn btn_lg btn_gray" onclick="closeLayer(this)">닫기</button>
+                <button type="button" class="btn btn_lg btn_danger">삭제</button>
+            </div>
+        </div>
+    </div>
+    <span class="layer_bg" onclick="closeLayer(this)"></span>
+</div>
+<!-- //서버삭제 -->
+
+
+<!-- 채널추가 -->
+<div id="chanel_registration" class="layer_popup">
+    <div class="layer_box design_scroll" data-simplebar style="max-width:75rem;">
+        <div class="layer_header">
+            <div class="layer_title">채널 추가</div>
+            <button type="button" class="layer_close" onclick="closeLayer(this)">팝업 닫기</button>
+        </div>
+        <div class="layer_body">
+            <div class="simple_search">
+                <form action="">
+                    <div class="item">
+                        <!-- <div class="tit">항목</div> -->
+                        <div class="cnt">
+                            <div class="input_group" style="width:27.4rem;">
+                                <input type="text" placeholder="채널명을 입력하세요">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btns">
+                        <button type="button" class="btn btn_md btn_submit">검색</button>
+                    </div>
+                </form>
+            </div>
+            <!-- 
+            table_line 테이블 사이사이 라인
+            thead_light thead bg 연함
+            thead_fixed thead 스크롤 고정
+            table_nowrap 내용 줄바꿈없이 한줄로 보임
+            label_control 전체 체크 컨트롤
+            -->
+            <div class="table_list table_line thead_fixed thead_light table_nowrap label_control design_scroll" data-simplebar style="max-height:59.6rem;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>선택
+                                <!-- 
+                                <label class="checkbox single"><input type="checkbox" class="check_all"><span class="ck_icon"></span></label>
+                                -->
+                            </th>
+                            <th>채널명</th>
+                            <th>프로세스 타입</th>
+                            <th>서비스명</th>
+                            <th>수신 PORT</th>
+                            <th>수신 IP</th>
+                            <th>송신 PORT</th>
+                            <th>기타1</th>
+                            <th>기타2</th>
+                            <th>기타3</th>
+                            <th>기타4</th>
+                            <th>기타5</th>
+                            <th>기타6</th>
+                            <th>기타7</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox"><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>서버</td>
+                            <td>50001</td>
+                            <td></td>
+                            <td></td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox" checked><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>클라이언트</td>
+                            <td></td>
+                            <td>10.0.0.1</td>
+                            <td>30001</td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox" disabled><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>서버</td>
+                            <td>50001</td>
+                            <td></td>
+                            <td></td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox"><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>서버</td>
+                            <td>50001</td>
+                            <td></td>
+                            <td></td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox" checked><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>클라이언트</td>
+                            <td></td>
+                            <td>10.0.0.1</td>
+                            <td>30001</td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox" disabled><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>서버</td>
+                            <td>50001</td>
+                            <td></td>
+                            <td></td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox"><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>서버</td>
+                            <td>50001</td>
+                            <td></td>
+                            <td></td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox" checked><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>클라이언트</td>
+                            <td></td>
+                            <td>10.0.0.1</td>
+                            <td>30001</td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox" disabled><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>서버</td>
+                            <td>50001</td>
+                            <td></td>
+                            <td></td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox"><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>서버</td>
+                            <td>50001</td>
+                            <td></td>
+                            <td></td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox" checked><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>클라이언트</td>
+                            <td></td>
+                            <td>10.0.0.1</td>
+                            <td>30001</td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox" disabled><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>서버</td>
+                            <td>50001</td>
+                            <td></td>
+                            <td></td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox"><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>서버</td>
+                            <td>50001</td>
+                            <td></td>
+                            <td></td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox" checked><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>클라이언트</td>
+                            <td></td>
+                            <td>10.0.0.1</td>
+                            <td>30001</td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox" disabled><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>서버</td>
+                            <td>50001</td>
+                            <td></td>
+                            <td></td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox"><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>서버</td>
+                            <td>50001</td>
+                            <td></td>
+                            <td></td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox" checked><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>클라이언트</td>
+                            <td></td>
+                            <td>10.0.0.1</td>
+                            <td>30001</td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                        <tr>
+                            <td><label class="checkbox single"><input type="checkbox" disabled><span class="ck_icon"></span></label></td>
+                            <td><a href="javascript:;" class="link">A기관 채널6</a></td>
+                            <td>온라인</td>
+                            <td>서버</td>
+                            <td>50001</td>
+                            <td></td>
+                            <td></td>
+                            <td>기타1 내용 기타1 내용</td>
+                            <td>기타2 내용 기타2 내용</td>
+                            <td>기타3 내용 기타3 내용</td>
+                            <td>기타4 내용 기타4 내용</td>
+                            <td>기타5 내용 기타5 내용</td>
+                            <td>기타6 내용 기타6 내용</td>
+                            <td>기타7 내용 기타7 내용</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="list_action">
+                <div class="l">
+                    <div class="paging_select">
+                        <div class="input_group">
+                            <!-- 페이지 로드 시 active된 옵션 기준으로 input hidden에 data-id 값 출력, select_selected에 문자 출력 -->
+                            <div class="custom_select">
+                                <input type="hidden">
+                                <button type="button" class="select_selected" onclick="customSelect(this)">15</button>
+                                <div class="options design_scroll" data-simplebar>
+                                    <div class="item"><a href="javascript:;" data-id="15" class="active" onclick="customSelectSelect(this)">15</a></div>
+                                    <div class="item"><a href="javascript:;" data-id="30" onclick="customSelectSelect(this)">30</a></div>
+                                    <div class="item"><a href="javascript:;" data-id="45" onclick="customSelectSelect(this)">45</a></div>
+                                    <div class="item"><a href="javascript:;" data-id="50" onclick="customSelectSelect(this)">50</a></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="page_status">1-15 of 50</div>
+                    </div>
+                </div>
+                <div class="r">
+                    <div class="paging">
+                        <a href="javascript:;" class="pg first disabled"></a>
+                        <a href="javascript:;" class="pg prev disabled"></a>
+                        <a href="javascript:;" class="pg first"></a>
+                        <a href="javascript:;" class="pg prev "></a>
+                        <a href="javascript:;">1</a>
+                        <a href="javascript:;" class="active">2</a>
+                        <a href="javascript:;">3</a>
+                        <a href="javascript:;">4</a>
+                        <a href="javascript:;">5</a>
+                        <a href="javascript:;" class="pg next"></a>
+                        <a href="javascript:;" class="pg end"></a>
+                        <a href="javascript:;" class="pg next disabled"></a>
+                        <a href="javascript:;" class="pg end disabled"></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layer_footer">
+            <div class="lf_btns">
+                <button type="button" class="btn btn_lg btn_gray" onclick="closeLayer(this)">닫기</button>
+                <button type="button" class="btn btn_lg btn_submit">확인</button>
+            </div>
+        </div>
+    </div>
+    <span class="layer_bg" onclick="closeLayer(this)"></span>
+</div>
+<!-- //채널추가 -->
+
+
+<!-- 엑셀업로드 -->
+<div id="excel_upload" class="layer_popup">
+    <div class="layer_box design_scroll" data-simplebar style="max-width:45rem;">
+        <div class="layer_header">
+            <div class="layer_title">엑셀업로드</div>
+            <button type="button" class="layer_close" onclick="closeLayer(this)">팝업 닫기</button>
+        </div>
+        <div class="layer_body">
+            <div class="input_group">
+                <label class="file_input">
+                    <input type="file" onchange="handleFileChange(this)">
+                    <span class="file_name">파일을 등록해주세요 </span>
+                    <button type="button" class="file_remove" style="display:none;" onclick="removeFile(this)">파일삭제</button>
+                    <span class="btn btn_lg btn_gray"><img src="../../assets/images/btn_icon_search2.svg">파일선택</span>
+                </label>
+            </div>
+        </div>
+        <div class="layer_footer">
+            <div class="l">
+                <a href="javascript:;" class="down">샘플 파일 다운로드</a>
+            </div>
+            <div class="lf_btns">
+                <button type="button" class="btn btn_lg btn_gray" onclick="closeLayer(this)">닫기</button>
+                <button type="button" class="btn btn_lg btn_submit">등록</button>
+            </div>
+        </div>
+    </div>
+    <span class="layer_bg" onclick="closeLayer(this)"></span>
+    <script>
+        function handleFileChange(inputElement) {
+            const fileInput = inputElement;
+            const fileNameSpan = fileInput.nextElementSibling;
+            const removeButton = fileNameSpan.nextElementSibling;
+    
+            if (fileInput.files.length > 0) {
+                const fileName = fileInput.files[0].name;
+                fileNameSpan.textContent = fileName;
+                removeButton.style.display = 'inline-block';
+            } else {
+                fileNameSpan.textContent = '파일을 등록해주세요';
+                removeButton.style.display = 'none';
+            }
+        }
+    
+        function removeFile(buttonElement) {
+            const removeButton = buttonElement;
+            const fileNameSpan = removeButton.previousElementSibling;
+            const fileInput = fileNameSpan.previousElementSibling;
+    
+            fileInput.value = '';
+            fileNameSpan.textContent = '파일을 등록해주세요';
+            removeButton.style.display = 'none';
+        }
+    </script>
+</div>
+<!-- //엑셀업로드 -->
+
+</body>
+</html>	 

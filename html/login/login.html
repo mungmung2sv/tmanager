@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=1200"/>
+<link rel="canonical" href="">
+<link rel="shortcut icon" type="image/x-icon" href="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta property="og:title" content=""/>
+<meta property="og:url" content="" />
+<meta property="og:image" content="" />
+<meta property="og:site_name" content=""/>
+<meta property="og:description" content="" />
+<title>T-Manager</title>
+<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/common.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/content.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/simplebar.css" />
+<script src="../../assets/js/jquery-3.4.1.min.js"></script>
+<script src="../../assets/js/jquery-ui.min.js"></script>
+<script src="../../assets/js/simplebar.min.js"></script>
+<script src="../../assets/js/common.js"></script>
+</head>
+<body>
+
+<script>
+//로딩 화면 예제
+function showLoading(){
+    loading('show');
+    //ajax db loading...
+    setTimeout(() => {
+        //loaded
+        loading('hide');
+    }, "3000");
+}
+document.addEventListener("DOMContentLoaded", function() {
+    showLoading()
+});
+</script>
+<!-- wrap -->
+<div id="layout" class="center login">
+	<h1 id="header_h1">T-Manager</h1>
+	
+	<hr class="hide" />	
+
+    <div class="center_box">
+        <div class="logo"><img src="../../assets/images/logo_login.svg" alt="T-Manager"></div>
+        <div class="center_body">
+            <form action="">
+                <h2>Log In</h2>
+                <div class="form_row">
+                    <div class="form_item">
+                        <div class="tit">ID</div>
+                        <div class="cnt">
+                            <div class="input_group">
+                                <input type="text" placeholder="ID" id="login_id">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form_item">
+                        <div class="tit">Password</div>
+                        <div class="cnt">
+                            <div class="input_group">
+                                <input type="password" placeholder="Password" id="login_password">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="save_id">
+                    <label class="checkbox">
+                        <input type="checkbox">
+                        <span class="ck_icon"></span>
+                        아이디 저장
+                    </label>
+                </div>
+                <div class="form_btns">
+                    <button type="submit" class="btn btn_xl btn_submit">로그인</button>
+                </div>
+            </form>
+        </div>
+        <div class="center_footer">
+            <span class="ver">T-Manager 2.0</span>
+            <span class="copy">Copyright ⓒ TrionSoft INC. ALL RIGTS RESERVED.</span>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>	 

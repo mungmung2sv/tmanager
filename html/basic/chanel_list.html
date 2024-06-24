@@ -1,0 +1,1366 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+<meta name="viewport" content="width=1200"/>
+<link rel="canonical" href="">
+<link rel="shortcut icon" type="image/x-icon" href="">
+<meta name="keywords" content="">
+<meta name="description" content="">
+<meta property="og:title" content=""/>
+<meta property="og:url" content="" />
+<meta property="og:image" content="" />
+<meta property="og:site_name" content=""/>
+<meta property="og:description" content="" />
+<title>T-Manager</title>
+<link rel="stylesheet" type="text/css" href="../../assets/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/common.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/content.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/jquery-ui.css" />
+<link rel="stylesheet" type="text/css" href="../../assets/css/simplebar.css" />
+<script src="../../assets/js/jquery-3.4.1.min.js"></script>
+<script src="../../assets/js/jquery-ui.min.js"></script>
+<script src="../../assets/js/simplebar.min.js"></script>
+<script src="../../assets/js/common.js"></script>
+</head>
+<body>
+
+<!-- wrap -->
+<div id="layout">
+	<h1 id="header_h1">T-Manager</h1>
+	<div id="skip_to_container">
+		<!-- skip navigation -->
+		<a href="#content">내용 바로가기</a>
+		<a href="#nav">서비스메뉴 바로가기</a>
+	</div>
+	<hr class="hide" />	
+
+	<!-- header -->
+	<div id="aside">
+        <script>
+            //자바스크립트로 쿠키확인 후 처리하기때문에 약간의 딜레이가 있을수 있음. 딜레이 없이 하려면 회원db에 상태값 저장해서 로드시 클래스 출력해서 사용하면 됨.  쿠키 딜레이 최소화 하기위해 태그 바로밑에서 스크립트 실행
+            const menuState = getCookie('menuState');
+            const asideElement = document.getElementById('aside');
+            if (menuState === 'open') {
+                asideElement.classList.add('active');
+            }
+        </script>
+		<div id="logo">
+            <a href="../main/main.html" class="large"><img src="../../assets/images/logo.svg" alt="T-Manager"></a>
+            <a href="../main/main.html" class="small"><img src="../../assets/images/logo_small.svg" alt="T-Manager"></a>
+        </div>
+        <div id="nav">
+            <ul>
+                <li class="active open"><a href="javascript:;"><img src="../../assets/images/nav_icon_basic.svg" class="nav_icon"><span>기본관리</span></a>
+                    <ul>
+                        <li><a href="../basic/server_list.html">서버관리</a></li> 
+                        <li><a href="../basic/chanel_list.html" class="active">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;"><img src="../../assets/images/nav_icon_server.svg" class="nav_icon"><span>서버설정</span></a>
+                    <ul>
+                        <li><a href="javascript:;">서버관리</a></li>
+                        <li><a href="javascript:;">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;"><img src="../../assets/images/nav_icon_professional.svg" class="nav_icon"><span>전문관리</span></a>
+                    <ul>
+                        <li><a href="javascript:;">서버관리</a></li>
+                        <li><a href="javascript:;">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;"><img src="../../assets/images/nav_icon_demon.svg" class="nav_icon"><span>데몬관리</span></a>
+                    <ul>
+                        <li><a href="javascript:;">서버관리</a></li>
+                        <li><a href="javascript:;">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;"><img src="../../assets/images/nav_icon_data.svg" class="nav_icon"><span>데이터관리</span></a>
+                    <ul>
+                        <li><a href="javascript:;">서버관리</a></li>
+                        <li><a href="javascript:;">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;"><img src="../../assets/images/nav_icon_statistics.svg" class="nav_icon"><span>통계관리</span></a>
+                    <ul>
+                        <li><a href="javascript:;">서버관리</a></li>
+                        <li><a href="javascript:;">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+                <li><a href="javascript:;"><img src="../../assets/images/nav_icon_operation.svg" class="nav_icon"><span>운영관리</span></a>
+                    <ul>
+                        <li><a href="javascript:;">서버관리</a></li>
+                        <li><a href="javascript:;">채널관리</a></li>
+                        <li><a href="javascript:;">그룹관리</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+	</div>
+	<!-- //header -->	
+
+    <div id="content_wrap">
+        <div id="header">
+            <div class="l">
+                <button id="menu_toggle" type="button" onclick="asideActive();">메뉴열기</button>
+                <script>
+                    //자바스크립트로 쿠키확인 후 처리하기때문에 약간의 딜레이가 있을수 있음. 딜레이 없이 하려면 회원db에 상태값 저장해서 로드시 클래스 출력해서 사용하면 됨.  쿠키 딜레이 최소화 하기위해 태그 바로밑에서 스크립트 실행
+                    const menuToggle = document.getElementById('menu_toggle');
+                    if (menuState === 'open') {
+                        menuToggle.classList.add('active');
+                    }
+
+                    //메뉴 토글 & 쿠키저장
+                    function asideActive(){
+                        const menuToggle = document.getElementById('menu_toggle');
+                        const asideElement = document.getElementById('aside');
+
+                        //메뉴 닫기
+                        if(menuToggle.classList.contains('active')){
+                            menuToggle.classList.remove('active');
+                            asideElement.classList.remove('active');
+                            setCookie('menuState', 'closed', 0);//쿠키저장
+                        }else{//메뉴 열기
+                            menuToggle.classList.add('active');
+                            asideElement.classList.add('active');
+                            setCookie('menuState', 'open', 0); //쿠키저장
+                        }
+                    }
+                </script>
+            </div>
+            <div class="r">
+                <div class="header_links">
+                    <div class="item"><a href="javascript:;" class="home"><img src="../../assets/images/header_icon_home.svg" class="header_icon"><span>홈</span></a></div>
+                    <div class="item"><a href="javascript:;" class="password"><img src="../../assets/images/header_icon_password.svg" class="header_icon"><span>비밀번호변경</span></a></div>
+                    <div class="item"><a href="../login/login.html" class="logout"><img src="../../assets/images/header_icon_logout.svg" class="header_icon"><span>로그아웃</span></a></div>
+                </div>
+            </div>
+        </div>
+        <!-- content -->
+        <div id="content">
+            <div class="page_title">
+                <h2>채널관리</h2>
+                <div class="page_history">
+                    <span class="item">기본관리</span>
+                    <span class="item">채널관리</span>
+                </div>
+            </div>
+
+            <div class="page">
+                <div class="list_search w_box">
+                    <div class="ls_title">검색조건</div>
+                    <div class="ls_content">
+                        <div class="item">
+                            <div class="tit">서버</div>
+                            <div class="cnt">
+                                <div class="input_group">
+                                    <!-- 페이지 로드 시 active된 옵션 기준으로 input hidden에 data-id 값 출력, select_selected에 문자 출력 -->
+                                    <div class="custom_select">
+                                        <input type="hidden">
+                                        <button type="button" class="select_selected" onclick="customSelect(this)">전체</button>
+                                        <div class="options design_scroll" data-simplebar>
+                                            <div class="item"><a href="javascript:;" data-id="all" class="active" onclick="customSelectSelect(this)">전체</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode1" onclick="customSelectSelect(this)">서버1</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode2" onclick="customSelectSelect(this)">서버2</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode3" onclick="customSelectSelect(this)">서버3</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode4" onclick="customSelectSelect(this)">서버4</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode5" onclick="customSelectSelect(this)">서버5</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode6" onclick="customSelectSelect(this)">서버6</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode7" onclick="customSelectSelect(this)">서버7</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode8" onclick="customSelectSelect(this)">서버8</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="tit">채널</div>
+                            <div class="cnt">
+                                <div class="input_group">
+                                    <!-- 페이지 로드 시 active된 옵션 기준으로 input hidden에 data-id 값 출력, select_selected에 문자 출력 -->
+                                    <div class="custom_select">
+                                        <input type="hidden">
+                                        <button type="button" class="select_selected" onclick="customSelect(this)">전체</button>
+                                        <div class="options design_scroll" data-simplebar>
+                                            <div class="item"><a href="javascript:;" data-id="all" class="active" onclick="customSelectSelect(this)">전체</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode1" onclick="customSelectSelect(this)">서버1</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode2" onclick="customSelectSelect(this)">서버2</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode3" onclick="customSelectSelect(this)">서버3</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode4" onclick="customSelectSelect(this)">서버4</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode5" onclick="customSelectSelect(this)">서버5</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode6" onclick="customSelectSelect(this)">서버6</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode7" onclick="customSelectSelect(this)">서버7</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode8" onclick="customSelectSelect(this)">서버8</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="tit">프로세스타입</div>
+                            <div class="cnt">
+                                <div class="input_group">
+                                    <!-- 페이지 로드 시 active된 옵션 기준으로 input hidden에 data-id 값 출력, select_selected에 문자 출력 -->
+                                    <div class="custom_select">
+                                        <input type="hidden">
+                                        <button type="button" class="select_selected" onclick="customSelect(this)">전체</button>
+                                        <div class="options design_scroll" data-simplebar>
+                                            <div class="item"><a href="javascript:;" data-id="all" class="active" onclick="customSelectSelect(this)">전체</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode1" onclick="customSelectSelect(this)">서버1</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode2" onclick="customSelectSelect(this)">서버2</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode3" onclick="customSelectSelect(this)">서버3</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode4" onclick="customSelectSelect(this)">서버4</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode5" onclick="customSelectSelect(this)">서버5</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode6" onclick="customSelectSelect(this)">서버6</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode7" onclick="customSelectSelect(this)">서버7</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode8" onclick="customSelectSelect(this)">서버8</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="tit">서비스코드</div>
+                            <div class="cnt">
+                                <div class="input_group">
+                                    <!-- 페이지 로드 시 active된 옵션 기준으로 input hidden에 data-id 값 출력, select_selected에 문자 출력 -->
+                                    <div class="custom_select">
+                                        <input type="hidden">
+                                        <button type="button" class="select_selected" onclick="customSelect(this)">전체</button>
+                                        <div class="options design_scroll" data-simplebar>
+                                            <div class="item"><a href="javascript:;" data-id="all" class="active" onclick="customSelectSelect(this)">전체</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode1" onclick="customSelectSelect(this)">서버1</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode2" onclick="customSelectSelect(this)">서버2</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode3" onclick="customSelectSelect(this)">서버3</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode4" onclick="customSelectSelect(this)">서버4</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode5" onclick="customSelectSelect(this)">서버5</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode6" onclick="customSelectSelect(this)">서버6</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode7" onclick="customSelectSelect(this)">서버7</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="servercode8" onclick="customSelectSelect(this)">서버8</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="tit">검색명</div>
+                            <div class="cnt">
+                                <div class="input_group">
+                                    <input type="text">
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="btns">
+                            <button type="submit" class="btn btn_md btn_submit"><img src="../../assets/images/btn_icon_search.svg">조회</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col_12 w_box">
+                        <div class="card_header">
+                            <div class="l">
+                                <div class="card_title">채널 목록</div>
+                            </div>
+                            <div class="r">
+                                <button type="button" class="btn btn_md btn_submit" onclick="openLayer('#chanel_registration')"><img src="../../assets/images/btn_icon_write.svg">채널등록</button>
+                            </div>
+                        </div>
+                        <div class="card_body">
+                            <!-- 
+                                thead_fixed thead 스크롤 고정
+                                table_nowrap 내용 줄바꿈없이 한줄로 보임
+                             -->
+                            <div class="table_list thead_fixed table_nowrap design_scroll" data-simplebar style="height:59.6rem;max-height:59.6rem;">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>채널명</th>
+                                            <th>프로세스 타입</th>
+                                            <th>서비스명</th>
+                                            <th>수신PORT</th>
+                                            <th>송신 IP</th>
+                                            <th>송신PORT</th>
+                                            <th>상태</th>
+                                            <th>기능</th>
+                                            <th>보안설정</th>
+                                            <th>설정</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox" checked>
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox" checked>
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox" checked>
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox" checked>
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr><tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox">
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr><tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox">
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr><tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox">
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr><tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox">
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr><tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox">
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr><tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox">
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr><tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox">
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr><tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox">
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr><tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox">
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr><tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox">
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr><tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox">
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr><tr>
+                                            <td><a href="javascript:;" class="link" onclick="openLayer('#chanel_modify')">A기관 채널1</a></td>
+                                            <td>온라인</td>
+                                            <td>서버</td>
+                                            <td>5001</td>
+                                            <td>10.0.01</td>
+                                            <td>30001</td>
+                                            <td><span class="status_circle green">실행</span></td>
+                                            <td>
+                                                <label class="check_control">
+                                                    <input type="checkbox">
+                                                    <div class="checked_data">
+                                                        <span class="data_checked">실행</span>
+                                                        <span class="data_unchecked">중지</span>
+                                                    </div>
+                                                </label>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray" onclick="openLayer('#chanel_security')"><img src="../../assets/images/btn_icon_setting.svg">설정</button>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_reset.svg">동기화</button>
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn_sm btn_gray"><img src="../../assets/images/btn_icon_change.svg">변경동기화</button>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="list_action">
+                                <div class="l">
+                                    <div class="paging_select">
+                                        <div class="input_group">
+                                            <!-- 페이지 로드 시 active된 옵션 기준으로 input hidden에 data-id 값 출력, select_selected에 문자 출력 -->
+                                            <div class="custom_select">
+                                                <input type="hidden">
+                                                <button type="button" class="select_selected" onclick="customSelect(this)">15</button>
+                                                <div class="options design_scroll" data-simplebar>
+                                                    <div class="item"><a href="javascript:;" data-id="15" class="active" onclick="customSelectSelect(this)">15</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="30" onclick="customSelectSelect(this)">30</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="45" onclick="customSelectSelect(this)">45</a></div>
+                                                    <div class="item"><a href="javascript:;" data-id="50" onclick="customSelectSelect(this)">50</a></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="page_status">1-15 of 50</div>
+                                    </div>
+                                </div>
+                                <div class="r">
+                                    <div class="paging">
+                                        <a href="javascript:;" class="pg first disabled"></a>
+                                        <a href="javascript:;" class="pg prev disabled"></a>
+                                        <a href="javascript:;" class="pg first"></a>
+                                        <a href="javascript:;" class="pg prev "></a>
+                                        <a href="javascript:;">1</a>
+                                        <a href="javascript:;" class="active">2</a>
+                                        <a href="javascript:;">3</a>
+                                        <a href="javascript:;">4</a>
+                                        <a href="javascript:;">5</a>
+                                        <a href="javascript:;" class="pg next"></a>
+                                        <a href="javascript:;" class="pg end"></a>
+                                        <a href="javascript:;" class="pg next disabled"></a>
+                                        <a href="javascript:;" class="pg end disabled"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        <!-- //content -->
+    
+        <div id="footer">
+            <span class="ver">T-Manager 2.0</span>
+            <span class="copy">Copyright ⓒ TrionSoft INC. ALL RIGTS RESERVED.</span>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- 채널등록 -->
+<div id="chanel_registration" class="layer_popup">
+    <div class="layer_box design_scroll" data-simplebar style="max-width:85rem;">
+        <div class="layer_header">
+            <div class="layer_title">채널 등록</div>
+            <button type="button" class="layer_close" onclick="closeLayer(this)">팝업 닫기</button>
+        </div>
+        <div class="layer_body">
+            <div class="table_form">
+                <table>
+                    <colgroup>
+                        <col style="width:124px;">
+                        <col style="width:calc(50% - 124px);">
+                        <col style="width:124px;">
+                        <col style="width:calc(50% - 124px);">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th>채널명</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>프로세스 타입</th>
+                            <td>
+                                <div class="input_group">
+                                    <div class="custom_select">
+                                        <input type="hidden">
+                                        <button type="button" class="select_selected" onclick="customSelect(this)">전체</button>
+                                        <div class="options design_scroll" data-simplebar>
+                                            <div class="item"><a href="javascript:;" data-id="all" class="active" onclick="customSelectSelect(this)">전체</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="12312313" onclick="customSelectSelect(this)">항목1</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="34534345" onclick="customSelectSelect(this)">항목2</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <th>서비스코드</th>
+                            <td>
+                                <div class="input_group">
+                                    <div class="custom_select">
+                                        <input type="hidden">
+                                        <button type="button" class="select_selected" onclick="customSelect(this)">전체</button>
+                                        <div class="options design_scroll" data-simplebar>
+                                            <div class="item"><a href="javascript:;" data-id="all" class="active" onclick="customSelectSelect(this)">전체</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="12312313" onclick="customSelectSelect(this)">항목1</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="34534345" onclick="customSelectSelect(this)">항목2</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>수신 프로토콜</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                            <th>송신 프로토콜</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>수신 캐릭터셋</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                            <th>송신 캐릭터셋</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>수신 포트</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                            <th>송신 포트</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>송신 IP</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                            <th>세션수</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>재송신 횟수</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                            <th>데이터 고정길이</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>재접속 딜레이</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                            <th>응답 대기시간</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>URL</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타1</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타2</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타3</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타4</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타5</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타6</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타7</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타8</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="layer_footer">
+            <div class="lf_btns">
+                <button type="button" class="btn btn_lg btn_gray" onclick="closeLayer(this)">닫기</button>
+                <button type="button" class="btn btn_lg btn_submit">저장</button>
+            </div>
+        </div>
+    </div>
+    <span class="layer_bg" onclick="closeLayer(this)"></span>
+</div>
+<!-- //채널등록 -->
+
+<!-- 채널수정 -->
+<div id="chanel_modify" class="layer_popup">
+    <div class="layer_box design_scroll" data-simplebar style="max-width:85rem;">
+        <div class="layer_header">
+            <div class="layer_title">채널 등록</div>
+            <button type="button" class="layer_close" onclick="closeLayer(this)">팝업 닫기</button>
+        </div>
+        <div class="layer_body">
+            <div class="table_form">
+                <table>
+                    <colgroup>
+                        <col style="width:124px;">
+                        <col style="width:calc(50% - 124px);">
+                        <col style="width:124px;">
+                        <col style="width:calc(50% - 124px);">
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th>채널명</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="A기관 채널1">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>프로세스 타입</th>
+                            <td>
+                                <div class="input_group">
+                                    <div class="custom_select">
+                                        <input type="hidden">
+                                        <button type="button" class="select_selected" onclick="customSelect(this)"></button>
+                                        <div class="options design_scroll" data-simplebar>
+                                            <div class="item"><a href="javascript:;" data-id="all"  onclick="customSelectSelect(this)">전체</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="온라인" class="active" onclick="customSelectSelect(this)">온라인</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="항목2" onclick="customSelectSelect(this)">항목2</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                            <th>서비스코드</th>
+                            <td>
+                                <div class="input_group">
+                                    <div class="custom_select">
+                                        <input type="hidden">
+                                        <button type="button" class="select_selected" onclick="customSelect(this)">전체</button>
+                                        <div class="options design_scroll" data-simplebar>
+                                            <div class="item"><a href="javascript:;" data-id="all" onclick="customSelectSelect(this)">전체</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="서버" class="active" onclick="customSelectSelect(this)">서버</a></div>
+                                            <div class="item"><a href="javascript:;" data-id="항목2" onclick="customSelectSelect(this)">항목2</a></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>수신 프로토콜</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="tcp">
+                                </div>
+                            </td>
+                            <th>송신 프로토콜</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="tcp">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>수신 캐릭터셋</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="euc-kr">
+                                </div>
+                            </td>
+                            <th>송신 캐릭터셋</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="euc-kr">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>수신 포트</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="50001">
+                                </div>
+                            </td>
+                            <th>송신 포트</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="60011">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>송신 IP</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="127.0.0.1">
+                                </div>
+                            </td>
+                            <th>세션수</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="4">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>재송신 횟수</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                            <th>데이터 고정길이</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="4">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>재접속 딜레이</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="10">
+                                </div>
+                            </td>
+                            <th>응답 대기시간</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>URL</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타1</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타2</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타3</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타4</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타5</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타6</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타7</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>기타8</th>
+                            <td colspan="3">
+                                <div class="input_group">
+                                    <input type="text" value="">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="layer_footer">
+            <div class="lf_btns">
+                <button type="button" class="btn btn_lg btn_gray" onclick="closeLayer(this)">닫기</button>
+                <button type="button" class="btn btn_lg btn_danger">삭제</button>
+                <button type="button" class="btn btn_lg btn_submit">수정</button>
+            </div>
+        </div>
+    </div>
+    <span class="layer_bg" onclick="closeLayer(this)"></span>
+</div>
+<!-- //채널수정 -->
+
+
+<!-- 채널 보안 설정 -->
+<div id="chanel_security" class="layer_popup">
+    <div class="layer_box design_scroll" data-simplebar style="max-width:60rem;">
+        <div class="layer_header">
+            <div class="layer_title">채널 보안 설정</div>
+            <button type="button" class="layer_close" onclick="closeLayer(this);chanelSecurityCancel()">팝업 닫기</button>
+        </div>
+        <div class="layer_body">
+            <div class="btn_list mb_15">
+                <div class="l"></div>
+                <div class="r">
+                    <button type="button" id="chanel_security_registration" onclick="chanelSecurityRegistration()" class="btn btn_white btn_lg"><img src="../../assets/images/btn_icon_add.svg">추가</button>
+                    <button type="button" id="chanel_security_cancel" onclick="chanelSecurityCancel()" class="btn btn_white btn_lg" style="display: none;"><img src="../../assets/images/btn_icon_minus.svg">닫기</button>
+                </div>
+            </div>
+            <!-- 
+            thead_fixed thead 스크롤 고정
+            table_nowrap 내용 줄바꿈없이 한줄로 보임
+            -->
+            <div class="table_list table_line thead_fixed thead_light table_nowrap design_scroll" data-simplebar style="max-height:22.1rem;">
+                <table>
+                    <colgroup>
+                        <col style="width:74px;">
+                        <col>
+                        <col style="width:204px;">
+                    </colgroup>
+                    <thead>
+                        <tr>
+                            <th>순번</th>
+                            <th>IP</th>
+                            <th>무시여부</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td data-text="서버1"><a href="javascript:;" class="link" onclick="chanelSecurityModify(this)">1</a></td>
+                            <td data-text="123.234.2.1">123.234.2.1</td>
+                            <td data-text="무시">무시</td>
+                        </tr>
+                        <tr>
+                            <td data-text="서버2"><a href="javascript:;" class="link" onclick="chanelSecurityModify(this)">2</a></td>
+                            <td data-text="192.168.0.1">192.168.0.1</td>
+                            <td data-text="무시">무시</td>
+                        </tr>
+                        <tr>
+                            <td data-text="서버3"><a href="javascript:;" class="link" onclick="chanelSecurityModify(this)">3</a></td>
+                            <td data-text="555.123.5.7">555.123.5.7</td>
+                            <td data-text="무시">무시</td>
+                        </tr>
+                        <tr>
+                            <td data-text="서버4"><a href="javascript:;" class="link" onclick="chanelSecurityModify(this)">4</a></td>
+                            <td data-text="222.111.2.2">222.111.2.2</td>
+                            <td data-text="무시">무시</td>
+                        </tr>
+                        <tr>
+                            <td data-text="서버5"><a href="javascript:;" class="link" onclick="chanelSecurityModify(this)">5</a></td>
+                            <td data-text="777.888.9.2">777.888.9.2</td>
+                            <td data-text="무시">무시</td>
+                        </tr>
+                        <tr>
+                            <td data-text="서버6"><a href="javascript:;" class="link" onclick="chanelSecurityModify(this)">6</a></td>
+                            <td data-text="212.555.2.7">212.555.2.7</td>
+                            <td data-text="무시">무시</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div id="chanel_security_form" class="layer_body" style="display:none;">
+            <div class="table_form">
+                <table>
+                    <colgroup>
+                        <col style="width:104px;">
+                        <col>
+                    </colgroup>
+                    <tbody>
+                        <tr>
+                            <th>서버명</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" id="chanel_security_form1" class="chanel_security_form_input" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>IP</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" id="chanel_security_form2" class="chanel_security_form_input" value="">
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>무시여부</th>
+                            <td>
+                                <div class="input_group">
+                                    <input type="text" id="chanel_security_form3" class="chanel_security_form_input" value="">
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="layer_footer">
+            <div class="lf_btns">
+                <button type="button" class="btn btn_lg btn_gray" onclick="closeLayer(this);chanelSecurityCancel()">닫기</button>
+                <button type="button" id="chanel_security_remove" class="btn btn_lg btn_danger" style="display:none;">삭제</button>
+                <button type="button" class="btn btn_lg btn_submit">저장</button>
+            </div>
+        </div>
+    </div>
+    <span class="layer_bg" onclick="closeLayer(this);chanelSecurityCancel()"></span>
+</div>
+
+<script>
+    const chanel_security_registration = document.getElementById('chanel_security_registration');
+    const chanel_security_cancel = document.getElementById('chanel_security_cancel');
+    const chanel_security_form = document.getElementById('chanel_security_form');
+    const chanel_security_form1 = document.getElementById('chanel_security_form1');
+    const chanel_security_form2 = document.getElementById('chanel_security_form2');
+    const chanel_security_form3 = document.getElementById('chanel_security_form3');
+    const chanel_security_form_input = document.querySelectorAll('.chanel_security_form_input');
+    const chanel_security_remove = document.getElementById('chanel_security_remove');
+    
+    function chanelSecurityRegistration(){//등록
+        chanel_security_form.style.display = 'block';
+        chanel_security_form_input.forEach(function(item){//폼초기화
+            item.value = '';
+        });
+        chanel_security_registration.style.display = 'none';
+        chanel_security_cancel.style.display = 'inline-flex';
+        chanel_security_remove.style.display = 'none';
+    }
+
+    function chanelSecurityCancel(){//닫기
+        chanel_security_form.style.display = 'none';
+        chanel_security_form_input.forEach(function(item){//폼초기화
+            item.value = '';
+        });
+        chanel_security_registration.style.display = 'inline-flex';
+        chanel_security_cancel.style.display = 'none';
+        chanel_security_remove.style.display = 'none';
+    }
+
+    function chanelSecurityModify(button){//항목 선택
+        const button_parent = button.closest('tr');
+        const data_text1 = button_parent.querySelector('td:nth-child(1)').getAttribute('data-text');
+        const data_text2 = button_parent.querySelector('td:nth-child(2)').getAttribute('data-text');
+        const data_text3 = button_parent.querySelector('td:nth-child(3)').getAttribute('data-text');
+
+        chanel_security_form.style.display = 'block';
+        chanel_security_registration.style.display = 'none';
+        chanel_security_cancel.style.display = 'inline-flex';
+        chanel_security_remove.style.display = 'block';
+
+        chanel_security_form1.value = data_text1;
+        chanel_security_form2.value = data_text2;
+        chanel_security_form3.value = data_text3;
+    }
+</script>
+
+<!-- //채널 보안 설정 -->
+</body>
+</html>	 
